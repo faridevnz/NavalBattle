@@ -1,0 +1,3 @@
+<div class="grid">
+  <app-box *ngFor="let state of boxes; index as i" [state]="state" (click)="clicked(i)"></app-box>
+</div>

@@ -1,0 +1,9 @@
+<div class="box">
+  <div class="boat" *ngIf="state.align === 'center' && state.busy" [ngClass]="{'destroyed': state.destroyed}"></div>
+  <div *ngIf="state.align === 'right'" class="boat-right"></div>
+  <div *ngIf="state.align === 'left'" class="boat-left"></div>
+  <div *ngIf="state.align === 'top'" class="boat-top"></div>
+  <div *ngIf="state.align === 'bottom'" class="boat-bottom"></div>
+  <div *ngIf="state.align === 'line-horizontal'" class="boat-line-horizontal"></div>
+  <div *ngIf="state.align === 'line-vertical'" class="boat-line-vertical"></div>
+</div>
