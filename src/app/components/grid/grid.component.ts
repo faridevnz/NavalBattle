@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 interface Neighbors {
   top: boolean,
@@ -23,8 +24,11 @@ interface boxState {
 export class GridComponent implements OnInit {
 
   boxes = [];
+  alignes = [];
+  
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) {
+  }
 
   ngOnInit(): void {
     for ( let i = 0; i < 100; i++ ) {
@@ -36,53 +40,65 @@ export class GridComponent implements OnInit {
         alignQueue: []
       }
       this.boxes.push(value)
+      this.alignes.push('center')
     }
   }
 
   clicked(index: number): void {
     // conditional initialization
-    if ( this.boxes[index].alignQueue.length === 0 ) {
-      this.boxes[index].alignQueue = this.neighborsCheck(index);
-      this.boxes[index].busy = true
-    }
+    this.neighborsCheck(index);
+    // TODO: aggiungere possibilita di eliminare una barca
+    this.boxes[index].busy = true
+
     let first: string = this.boxes[index].alignQueue.shift()
     this.boxes[index].alignQueue.push(first)
-    console.log(this.boxes[index].alignQueue)
+    //console.log(this.boxes[index].alignQueue)
     switch ( this.boxes[index].alignQueue[0] ) {
       case 'top':
-        this.boxes[index].align = "top"
-        this.boxes[index-10].align = "bottom"
+        this.alignes[index] = "top"
         break;
       case 'right':
-        this.boxes[index].align = "right"
-        this.boxes[index+1].align = "left"
+        this.alignes[index] = "right"
         break;
       case 'bottom':
-        this.boxes[index].align = "bottom"
-        this.boxes[index+10].align = "top"
+        this.alignes[index] = "bottom"
         break;
       case 'left':
-        this.boxes[index].align = "left"
-        this.boxes[index-1].align = "right"
+        this.alignes[index] = "left"
         break;
+      case 'line-horizontal':
+        this.alignes[index] = "line-horizontal"
+        break;
+        case 'line-vertical':
+          this.alignes[index] = "line-vertical"
+          break;
       default:
-        this.boxes[index]["align"] = "center"
+        this.alignes[index] = "center"
         break;
     }
   }
 
-  neighborsCheck(index: number): string[] {
-    let queue: string[] = []
+  neighborsCheck(index: number): void {
+    // conditionally adding center
+    if ( !this.boxes[index].alignQueue.includes('center') )
+      this.boxes[index].alignQueue.push('center')
     // top check
-    if ( index > 9 && this.boxes[index-10].busy ) queue.push('top')
+    if ( index > 9 && this.boxes[index-10].busy && !this.boxes[index].alignQueue.includes('top') ) 
+      this.boxes[index].alignQueue.push('top')
     // right check
-    if ( index%9 !== 0 && this.boxes[index+1].busy ) queue.push('right')
-    //bottom check
-    if ( index < 49 && this.boxes[index+10].busy ) queue.push('bottom')
+    if ( (index-1)%10 !== 0 && this.boxes[index+1].busy && !this.boxes[index].alignQueue.includes('right') ) 
+      this.boxes[index].alignQueue.push('right')
+    // bottom check
+    if ( index < 49 && this.boxes[index+10].busy && !this.boxes[index].alignQueue.includes('bottom') ) 
+      this.boxes[index].alignQueue.push('bottom')
     // left check
-    if ( index%10 !== 0 && this.boxes[index-1].busy ) queue.push('left')
-    queue.concat('center')
-    return queue;
+    if ( index%10 !== 0 && this.boxes[index-1].busy && !this.boxes[index].alignQueue.includes('left') ) 
+      this.boxes[index].alignQueue.push('left')
+    // horizontal line check
+    if ( !this.boxes[index].alignQueue.includes('line-horizontal') )
+      this.boxes[index].alignQueue.push('line-horizontal')
+    if ( !this.boxes[index].alignQueue.includes('line-vertical') )
+      this.boxes[index].alignQueue.push('line-vertical')
   }
 
 }

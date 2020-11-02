@@ -20,6 +20,9 @@
     background-color: #ff634790;
     border: solid 2px  #ff6347;
   }
+  .boat[class="boat no-border"] {
+    border: solid 2px transparent !important;
+  }
 
   .boat-right {
     border-radius: 10px 0 0 10px;
@@ -87,4 +90,16 @@
     box-sizing: border-box;
   }
 
+  .boat-border-right {
+    border-right: solid 2px #9dff47;
+  }
+  .boat-border-left {
+    border-left: solid 2px #9dff47;
+  }
+  
+
+}
+
+.box[class="box no-border"] {
+  border: solid 2px transparent;
 }

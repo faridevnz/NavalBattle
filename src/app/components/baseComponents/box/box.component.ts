@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 interface boxState {
   busy: boolean,
   destroyed: boolean,
-  align: string,
   alignQueue: string[]
 }
 
@@ -16,6 +15,8 @@ interface boxState {
 export class BoxComponent implements OnInit {
   // props
   @Input() state: boxState;
+  @Input() align: string;
+  @Input() border: boolean = true;
 
   constructor() { }
 

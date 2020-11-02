@@ -1,0 +1,68 @@
+.home {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 200px;
+    box-sizing: border-box;
+    position: relative;
+
+    .game-code {
+        position: absolute;
+        left: 200px;
+        top: 150px;
+        color: white;
+        font-family: 'Turret Road', cursive;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        p {
+            font-size: 20px;
+        }
+
+        h4 {
+            margin: 0;
+            font-size: 35px;
+            font-weight: 600;
+        }
+
+    }
+
+    .left {
+        width: 30vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .pieces-number {
+                width: 40px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: white;
+                font-size: 20px;
+                font-family: 'Turret Road', cursive;
+                font-weight: 500;
+            }
+
+        }
+
+    }
+    
+    .grid-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: max-content;
+        height: 100vh;
+    }
+
+}
