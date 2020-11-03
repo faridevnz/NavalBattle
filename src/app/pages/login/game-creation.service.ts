@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { generateRandomString } from '../../services/utils';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { gameSettings } from '../../services/gameConfig';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +21,37 @@ export class GameCreationService {
 
   async createGame() {
     //generiamo il codice del Gioco
-    const gameSettings = {
-      gameID: await generateRandomString(5),
-      playerID: await generateRandomString(5)
-    }
+    gameSettings.gameID = generateRandomString(5)
+    gameSettings.playerID = 1
     // scriviamo su firebase
-    await this.firestore.collection(gameSettings.gameID).doc(gameSettings.playerID).set({'last': ''})
-      .then( res => console.log(res) )
+    this.firestore.collection(gameSettings.gameID)
+      .doc('last')
+      .set(
+        {
+          'value': null,
+          'turn': gameSettings.playerID
+        }
+      )
       .catch( err => console.log(err) );
+    this.firestore.collection(gameSettings.gameID)
+      .doc('outcome')
+      .set(
+        {
+          'index': null,
+          'value': null
+        }
+      )
+      .catch( err => console.log(err) );
+  }
 
-    return gameSettings;
+  async getAllGames(joinCode: string): Promise<any> {
+    this.firestore.collection(joinCode).doc('last').set(
+      { 
+        'turn': 1
+      },
+      { merge: true }
+    )
+    .catch((error) => console.log(error))
   }
 
 }

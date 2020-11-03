@@ -9,11 +9,7 @@
     position: relative;
 
     .game-code {
-        position: absolute;
-        left: 200px;
-        top: 150px;
         color: white;
-        font-family: 'Turret Road', cursive;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -35,7 +31,7 @@
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
 
         .row {
             display: flex;
@@ -53,6 +49,15 @@
                 font-weight: 500;
             }
 
+        }
+
+        .error {
+            position: absolute;
+            bottom: 200px;
+            color: tomato;
+            font-size: 20px;
+            font-family: 'Turret Road', cursive;
+            font-weight: 500;
         }
 
     }

@@ -1,56 +1,64 @@
 <div class="home">
-    <!-- Title -->
-    <div class="game-code">
-        <p>condividi questo codice con il tuo avversario</p>
-        <h4>game: {{ gameID }}</h4>
-    </div>
     <div class="left">
-        <!-- PEZZI DA 1 -->
-        <div class="row">
-            <p class="pieces-number">
-                {{ pieces[1] }}
-            </p>
-            <app-box [state]="defaultBoxState" [align]="'center'" [border]="false"></app-box>
+        <!-- Title -->
+        <div class="game-code">
+            <p>condividi questo codice con il tuo avversario</p>
+            <h4>game: {{ gameID }}</h4>
+            <br>
+            box: {{ boxNumber }}
         </div>
-        <!-- PEZZI DA 2 -->
-        <div class="row">
-            <p class="pieces-number">
-                {{ pieces[2] }}
-            </p>
-            <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+        <div>
+            <!-- PEZZI DA 1 -->
+            <div class="row">
+                <p class="pieces-number">
+                    {{ pieces[1] }}
+                </p>
+                <app-box [state]="defaultBoxState" [align]="'center'" [border]="false"></app-box>
+            </div>
+            <!-- PEZZI DA 2 -->
+            <div class="row">
+                <p class="pieces-number">
+                    {{ pieces[2] }}
+                </p>
+                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+            </div>
+            <!-- PEZZI DA 3 -->
+            <div class="row">
+                <p class="pieces-number">
+                    {{ pieces[3] }}
+                </p>
+                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+            </div>
+            <!-- PEZZI DA 4 -->
+            <div class="row">
+                <p class="pieces-number">
+                    {{ pieces[4] }}
+                </p>
+                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+            </div>
+            <div class="row">
+                <p class="pieces-number">
+                    {{ pieces[5] }}
+                </p>
+                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+            </div>
         </div>
-        <!-- PEZZI DA 3 -->
-        <div class="row">
-            <p class="pieces-number">
-                {{ pieces[3] }}
-            </p>
-            <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
-        </div>
-        <!-- PEZZI DA 4 -->
-        <div class="row">
-            <p class="pieces-number">
-                {{ pieces[4] }}
-            </p>
-            <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
-        </div>
-        <div class="row">
-            <p class="pieces-number">
-                {{ pieces[5] }}
-            </p>
-            <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-            <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+        <div>
+            <app-button [width]="15" [height]="70" (click)="next()">save</app-button>
+            <p *ngIf="error" class="error">Errore: non hai posizionato il numero esatto di navi</p>
         </div>
     </div>
     <div class="grid-container">
-        <app-grid></app-grid>
+        <app-grid [board]="board" [type]="'my'" (onBoxAdded)="incrementBoxNumber($event)"></app-grid>
     </div>
 </div>

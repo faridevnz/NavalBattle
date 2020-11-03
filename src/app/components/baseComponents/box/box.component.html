@@ -1,5 +1,7 @@
 <div class="box" [ngClass]="{'no-border': !border}">
-  <div class="boat" *ngIf="align === 'center' && state.busy" [ngClass]="{'destroyed': state.destroyed}"></div>
+  <div *ngIf="!state.busy && state.bomb" class="cross">X</div>
+  <div *ngIf="align === null && state.busy && state.bomb" class="circle">O</div>
+  <div class="boat" *ngIf="align === 'center' && state.busy" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
   <div *ngIf="align === 'right'" class="boat-right" [ngClass]="{'boat-border-right': !border}"></div>
   <div *ngIf="align === 'left'" class="boat-left" [ngClass]="{'boat-border-left': !border}"></div>
   <div *ngIf="align === 'top'" class="boat-top"></div>

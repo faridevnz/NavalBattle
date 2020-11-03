@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 interface boxState {
   busy: boolean,
-  destroyed: boolean,
+  bomb: boolean,
   alignQueue: string[]
 }
 

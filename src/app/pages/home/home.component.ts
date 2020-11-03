@@ -1,11 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-interface boxState {
-  busy: boolean,
-  destroyed: boolean,
-  alignQueue: string[]
-}
+import { ActivatedRoute, Router } from '@angular/router';
+import { defaultBox } from '../../services/gameConfig';
+import { gameSettings, board } from '../../services/gameConfig';
 
 
 @Component({
@@ -17,14 +13,13 @@ export class HomeComponent implements OnInit {
 
   @Input() gameCode: string = null
   // router queryparams
-  gameID: string = null
-  playerID: string = null
+  board = board
+  gameID: string = gameSettings.gameID
+  playerID: string = gameSettings.playerID
+  defaultBoxState = defaultBox
+  boxNumber: number = 0
+  error: boolean = false
 
-  defaultBoxState: boxState = {
-    busy: true,
-    destroyed: false,
-    alignQueue: []
-  }
   pieces = {
     1: 5,
     2: 3,
@@ -33,14 +28,29 @@ export class HomeComponent implements OnInit {
     5: 1
   }
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    console.log('init')
-    this.route.queryParams.subscribe(params => {
-      this.gameID = params['gameID']
-      this.playerID = params['playerID']
-    })
+    this.defaultBoxState.busy = true;
+    // prendo il codice della partita ed il codice utente
+    // this.route.queryParams.subscribe(params => {
+    //   this.gameID = params['gameID']
+    //   this.playerID = params['playerID']
+    // })
+  }
+
+  incrementBoxNumber(value: number): void {
+    this.error = false;
+    this.boxNumber += value
+  }
+
+  next(): void {
+    // caso di errore
+    //if ( this.boxNumber != 30 ) this.error = true;
+    // caso corretto
+    //else {
+      this.router.navigate(['/play'])
+    //}
   }
 
 }

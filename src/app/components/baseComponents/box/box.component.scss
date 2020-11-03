@@ -7,6 +7,19 @@
   align-items: center;
   box-sizing: border-box;
 
+  .cross {
+    color: tomato;
+    font-weight: 600;
+    font-family: 'Turret Road', cursive;
+    font-size: 20px;
+  }
+  .circle {
+    color: #9dff47;
+    font-weight: 600;
+    font-family: 'Turret Road', cursive;
+    font-size: 20px;
+  }
+
   .boat {
     border-radius: 10px;
     background-color: #9dff4785;

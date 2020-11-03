@@ -1,0 +1,4 @@
+<div class="row">
+    <app-grid [board]="gameBoard" [type]="'my'" [disableClick]="true"></app-grid>
+    <app-grid [board]="oppositeBoard" [type]="'opposite'" (onOppositClick)="attacks($event)"></app-grid>
+</div>

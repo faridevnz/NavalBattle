@@ -10,6 +10,7 @@ import { firebaseConfig } from './services/db/config';
 import { LoginComponent } from './pages/login/login.component';
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/baseComponents/button/button.component';
+import { PlayComponent } from './pages/play/play.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ButtonComponent } from './components/baseComponents/button/button.compo
     BoxComponent,
     GridComponent,
     LoginComponent,
-    ButtonComponent
+    ButtonComponent,
+    PlayComponent
   ],
   imports: [
     BrowserModule,
