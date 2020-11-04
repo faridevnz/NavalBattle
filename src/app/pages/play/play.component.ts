@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { board, oppositeBoard, gameSettings } from '../../services/gameConfig';
+import { Component, OnInit } from '@angular/core'
+import { AngularFirestore } from '@angular/fire/firestore'
+import { board, oppositeBoard, gameSettings } from '../../services/gameConfig'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -15,8 +16,10 @@ export class PlayComponent implements OnInit {
   turn: number = 1
   playerID: number = gameSettings.playerID
   latest: number = null
+  remainingBoxes: number = 5
 
-  constructor(private firestore: AngularFirestore) { }
+
+  constructor(private firestore: AngularFirestore, private router: Router) { }
 
   async ngOnInit() {
     // observable dell'update della mossa avversaria
@@ -31,6 +34,7 @@ export class PlayComponent implements OnInit {
           this.gameBoard[index].bomb = true
           this.latest = index
           // update dell'esito su firestore
+          if ( this.gameBoard[index].busy ) this.remainingBoxes--
           this.updateOutcome(index)
         }
       })
@@ -40,6 +44,9 @@ export class PlayComponent implements OnInit {
       .subscribe(data => {
         let index: number = data['index']
         let value: boolean = data['value']
+        let winner: number = data['winner']
+        // se la partita e finita redirect alla pagina di fine
+        if ( winner !== null ) this.router.navigate(['/end'], { queryParams: { winner: winner } })
         // controllo se e il mio turno
         if ( index !== null && this.turn === gameSettings.playerID ) {
           // settiamo la bomba e l'esito sulla board avversaria locale
@@ -49,12 +56,16 @@ export class PlayComponent implements OnInit {
       })
   }
 
+
+  // FUNCTIONS
+
   updateOutcome(index: number) {
     this.firestore.collection(gameSettings.gameID).doc('outcome')
       .set(
         {
           'index': index,
-          'value': this.gameBoard[index].busy
+          'value': this.gameBoard[index].busy,
+          'winner': ( this.remainingBoxes === 0 ) ? gameSettings.playerID : null
         },
         { merge: true }
       )

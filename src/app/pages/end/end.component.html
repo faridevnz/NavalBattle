@@ -1,0 +1,7 @@
+<div class="end-page">
+    <h1 *ngIf="!outcome">WINNER</h1>
+    <h1 *ngIf="outcome">LOSER</h1>
+    <a routerLink="/">
+        <app-button [height]="70" [width]="20">Home</app-button>
+    </a>
+</div>
