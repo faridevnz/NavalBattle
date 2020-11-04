@@ -14,9 +14,10 @@ interface boxState {
 })
 export class BoxComponent implements OnInit {
   // props
-  @Input() state: boxState;
-  @Input() align: string;
-  @Input() border: boolean = true;
+  @Input() state: boxState
+  @Input() align: string
+  @Input() border: boolean = true
+  @Input() latest: boolean = false
 
   constructor() { }
 

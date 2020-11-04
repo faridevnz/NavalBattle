@@ -1,4 +1,4 @@
-<div class="box" [ngClass]="{'no-border': !border}">
+<div class="box" [ngClass]="{'no-border': !border, 'latest': latest}">
   <div *ngIf="!state.busy && state.bomb" class="cross">X</div>
   <div *ngIf="align === null && state.busy && state.bomb" class="circle">O</div>
   <div class="boat" *ngIf="align === 'center' && state.busy" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
