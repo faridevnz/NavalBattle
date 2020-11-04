@@ -39,7 +39,7 @@ export class PlayComponent implements OnInit {
         let index: number = data['index']
         let value: boolean = data['value']
         // controllo se e il mio turno
-        if ( index && this.turn == gameSettings.playerID ) {
+        if ( index !== null && this.turn == gameSettings.playerID ) {
           // settiamo la bomba e l'esito sulla board avversaria locale
           this.oppositeBoard[index].bomb = true
           this.oppositeBoard[index].busy = value
