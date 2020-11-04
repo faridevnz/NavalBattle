@@ -14,6 +14,7 @@ export class PlayComponent implements OnInit {
   oppositeBoard = oppositeBoard
   turn: number = 1
   playerID: number = gameSettings.playerID
+  latest: number = null
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -28,6 +29,7 @@ export class PlayComponent implements OnInit {
         this.turn = data['turn']
         if ( index !== null && this.turn !== gameSettings.playerID ) {
           this.gameBoard[index].bomb = true
+          this.latest = index
           // update dell'esito su firestore
           this.updateOutcome(index)
         }
