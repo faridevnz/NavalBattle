@@ -32,11 +32,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.defaultBoxState.busy = true;
-    // prendo il codice della partita ed il codice utente
-    // this.route.queryParams.subscribe(params => {
-    //   this.gameID = params['gameID']
-    //   this.playerID = params['playerID']
-    // })
   }
 
   incrementBoxNumber(value: number): void {
@@ -46,11 +41,11 @@ export class HomeComponent implements OnInit {
 
   next(): void {
     // caso di errore
-    //if ( this.boxNumber != 30 ) this.error = true;
+    if ( this.boxNumber != 30 ) this.error = true;
     // caso corretto
-    //else {
+    else {
       this.router.navigate(['/play'])
-    //}
+    }
   }
 
 }
