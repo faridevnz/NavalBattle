@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { defaultBox } from '../../services/gameConfig';
-import { gameSettings, board } from '../../services/gameConfig';
+import { gameSettings, board, boatsNumber } from '../../services/gameConfig';
 
 
 @Component({
@@ -20,13 +20,7 @@ export class HomeComponent implements OnInit {
   boxNumber: number = 0
   error: boolean = false
 
-  pieces = {
-    1: 5,
-    2: 3,
-    3: 2,
-    4: 2,
-    5: 1
-  }
+  pieces = boatsNumber
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 

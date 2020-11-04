@@ -1,6 +1,7 @@
 import { Input, Output } from '@angular/core';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { boatsNumber } from 'src/app/services/gameConfig';
 
 interface Neighbors {
   top: boolean,
@@ -42,41 +43,78 @@ export class GridComponent implements OnInit {
   }
 
   clicked(index: number): void {
+    // OPPOSITE BOARD
     if (this.type === 'opposite') {
       // emissione dell evento per attaccare l'avversario
       this.onOppositClick.emit(index)
     }
+    // MY BOARD
     if (this.type === 'my') {
       // se la griglia non e cliccabile allora non faccio nulla
       if (this.disableClick) return
       // altrimenti
-      if (!this.board[index].busy) this.onBoxAdded.emit(1)
-      else this.onBoxAdded.emit(-1)
-      this.board[index].busy = !this.board[index].busy
+      // scelta di come gestire le barche
+      this.boatsHandle(index)
     }
   }
 
-  neighborsCheck(index: number): void {
-    // conditionally adding center
-    if (!this.board[index].alignQueue.includes('center'))
-      this.board[index].alignQueue.push('center')
+  boatsHandle(index): void {
+    // prendiamo l'array dei vicini della cella selezionata
+    let neight: string[] = this.neighborsCheck(index)
+    // CASO NON BUSY
+    if ( !this.board[index].busy ) {
+      // emissione evento
+      this.onBoxAdded.emit(1)
+      // caso di nessun vicino (+1)
+      if ( !neight.length && boatsNumber[1] > 0 ) {
+        this.board[index].busy = !this.board[index].busy
+        boatsNumber[1]--
+      }
+      // caso di un solo vicino (+1)
+      if ( neight.length === 1 ) {
+        switch ( neight[0] ) {
+          case 'top':
+            if ( this.board[index-10].neight )
+            break;
+          case 'right':
+            break;
+          case 'bottom':
+            break;
+          case 'left':
+            break;
+        }
+      }
+    }
+    // CASO BUSY
+    else {
+      // emissione evento
+      this.onBoxAdded.emit(-1)
+      // caso di nessun vicino (-1)
+      if ( !neight.length )  {
+        this.board[index].busy = !this.board[index].busy
+        boatsNumber[1]++
+      }
+    }
+  }
+
+  neighborsCheck(index: number): string[] {
+    
+    let neigh: string[] = []
     // top check
-    if (index > 9 && this.board[index - 10].busy && !this.board[index].alignQueue.includes('top'))
-      this.board[index].alignQueue.push('top')
+    if (index > 9 && this.board[index - 10].busy)
+      neigh.push('top')
     // right check
-    if ((index - 1) % 10 !== 0 && this.board[index + 1].busy && !this.board[index].alignQueue.includes('right'))
-      this.board[index].alignQueue.push('right')
+    if ((index+1)%10 !== 0 && this.board[index + 1].busy)
+      neigh.push('right')
     // bottom check
-    if (index < 49 && this.board[index + 10].busy && !this.board[index].alignQueue.includes('bottom'))
-      this.board[index].alignQueue.push('bottom')
+    if (index < 90 && this.board[index + 10].busy)
+      neigh.push('bottom')
     // left check
-    if (index % 10 !== 0 && this.board[index - 1].busy && !this.board[index].alignQueue.includes('left'))
-      this.board[index].alignQueue.push('left')
-    // horizontal line check
-    if (!this.board[index].alignQueue.includes('line-horizontal'))
-      this.board[index].alignQueue.push('line-horizontal')
-    if (!this.board[index].alignQueue.includes('line-vertical'))
-      this.board[index].alignQueue.push('line-vertical')
+    if (index%10 !== 0 && this.board[index - 1].busy)
+      neigh.push('left')
+    
+    return neigh
+
   }
 
 }

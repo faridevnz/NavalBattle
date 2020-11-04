@@ -5,6 +5,12 @@ interface boxState {
   bomb: boolean,
   alignQueue: string[]
 }
+interface boxNeigh {
+  top: number,
+  right: number,
+  bottom: number,
+  left: number
+}
 
 // Component
 @Component({
@@ -17,6 +23,7 @@ export class BoxComponent implements OnInit {
   @Input() state: boxState;
   @Input() align: string;
   @Input() border: boolean = true;
+  neighbors: boxNeigh = { top: 0, right: 0, bottom: 0, left: 0 }
 
   constructor() { }
 
