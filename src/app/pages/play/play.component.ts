@@ -16,7 +16,7 @@ export class PlayComponent implements OnInit {
   turn: number = 1
   playerID: number = gameSettings.playerID
   latest: number = null
-  remainingBoxes: number = 5
+  remainingBoxes: number = 30
 
 
   constructor(private firestore: AngularFirestore, private router: Router) { }

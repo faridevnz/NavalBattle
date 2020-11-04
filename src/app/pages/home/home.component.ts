@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   next(): void {
     // caso di errore
-    if ( this.boxNumber != 5 ) this.error = true;
+    if ( this.boxNumber != 30 ) this.error = true;
     // caso corretto
     else {
       this.router.navigate(['/play'])
