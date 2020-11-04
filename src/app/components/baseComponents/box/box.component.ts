@@ -25,4 +25,14 @@ export class BoxComponent implements OnInit {
 
   }
 
+
+  draggedOver(event) {
+    event.preventDefault()
+  }
+
+  droppedItem(event) {
+    console.log('DROPPED')
+    console.log(event.dataTransfer.getData('text'))
+  }
+
 }

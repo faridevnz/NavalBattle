@@ -51,9 +51,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  dragStarted(event) {
-    event.dataTransfer.setData('data');
-    console.log(event)
+  dragStarted(event: DragEvent, boxesNumber: string) {
+    console.log('START EVENT:')
+    event.dataTransfer.setData('text/plain', boxesNumber)
+  }
+
+  dragOver(event) {
+    event.preventDefault()
   }
 
 }
