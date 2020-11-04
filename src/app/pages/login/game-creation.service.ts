@@ -38,7 +38,8 @@ export class GameCreationService {
       .set(
         {
           'index': null,
-          'value': null
+          'value': null,
+          'winner': null
         }
       )
       .catch( err => console.log(err) );

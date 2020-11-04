@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GameCreationService } from './game-creation.service';
 import { Router } from '@angular/router';
 import { gameSettings } from '../../services/gameConfig';
-import { generateRandomString } from '../../services/utils';
  
 @Component({
   selector: 'app-login',

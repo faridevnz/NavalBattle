@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/baseComponents/button/button.component';
 import { PlayComponent } from './pages/play/play.component';
+import { EndComponent } from './pages/end/end.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PlayComponent } from './pages/play/play.component';
     GridComponent,
     LoginComponent,
     ButtonComponent,
-    PlayComponent
+    PlayComponent,
+    EndComponent
   ],
   imports: [
     BrowserModule,
