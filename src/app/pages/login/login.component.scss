@@ -8,6 +8,12 @@
 .buttons-container {
     width: 50vw;
 
+    .title {
+        color: white;
+        font-size: 80px;
+        font-weight: 900;
+    }
+
     p {
         color: white;
         font-size: 20px;
@@ -17,13 +23,14 @@
     .join-input {
         width: 16vw;
         border: solid 3px white;
-        height: 70px;
-        border-radius: 30px;
+        height: 60px;
+        border-radius: 25px;
         margin-right: 15px;
         background-color: transparent;
         font-size: 20px;
         padding: 0 25px 0 25px;
         color: white;
+        box-sizing: border-box;
 
         &::placeholder {
             font-weight: 400;

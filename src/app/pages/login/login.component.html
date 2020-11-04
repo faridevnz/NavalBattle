@@ -1,11 +1,12 @@
 <div class="buttons-container column">
-    <app-button class="create-button" (click)="createGame()">create</app-button>
+    <h1 class="title">Naval Battle</h1>
+    <app-button class="create-button" (click)="createGame()" [height]="60" [width]="20">create</app-button>
     <br>
     <p>or</p>
     <br>
     <div>
         <input type="text" placeholder="join code" class="join-input" (input)="updateJoinCode($event)">
-        <app-button class="join-button" (click)="joinGame()" [width]="10">join</app-button>
+        <app-button class="join-button" (click)="joinGame()" [height]="60" [width]="8">join</app-button>
     </div>
     <h6 *ngIf="error">Error: codice di accesso al Game non valido</h6>
 </div>
