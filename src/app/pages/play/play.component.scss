@@ -3,4 +3,17 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
+    .circle {
+        width: 25px;
+        height: 25px;
+        border-radius: 20px;
+        background-color: tomato;
+        transition: all 100ms linear;
+    }
+
+    .active {
+        background-color: #9dff47;
+    }
+
 }
