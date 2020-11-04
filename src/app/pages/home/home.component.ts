@@ -51,4 +51,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  dragStarted(event) {
+    event.dataTransfer.setData('data');
+    console.log(event)
+  }
+
 }
