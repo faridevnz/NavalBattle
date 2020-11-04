@@ -26,7 +26,7 @@ export class PlayComponent implements OnInit {
       .subscribe(data => {
         index = data['value']
         this.turn = data['turn']
-        if (index && this.turn != gameSettings.playerID) {
+        if (index !== null && this.turn != gameSettings.playerID) {
           this.gameBoard[index].bomb = true
           // update dell'esito su firestore
           this.updateOutcome(index)
