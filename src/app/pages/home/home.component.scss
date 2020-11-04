@@ -38,6 +38,10 @@
             justify-content: flex-start;
             align-items: center;
 
+            .boat {
+                display: flex;
+            }
+
             .pieces-number {
                 width: 40px;
                 display: flex;

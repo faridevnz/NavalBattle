@@ -9,48 +9,59 @@
         </div>
         <div>
             <!-- PEZZI DA 1 -->
-            <div class="row">
+            <div class="row" draggable="true">
                 <p class="pieces-number">
                     {{ pieces[1] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'center'" [border]="false"></app-box>
+                <div class="boat" draggable="true" (dragstart)="dragStarted($event)">
+                    <app-box [state]="defaultBoxState" [align]="'center'" [border]="false"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 2 -->
-            <div class="row">
+            <div class="row" draggable="true">
                 <p class="pieces-number">
                     {{ pieces[2] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" draggable="true">
+                    <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 3 -->
-            <div class="row">
+            <div class="row" draggable="true">
                 <p class="pieces-number">
                     {{ pieces[3] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" draggable="true">
+                    <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 4 -->
-            <div class="row">
+            <div class="row" draggable="true">
                 <p class="pieces-number">
                     {{ pieces[4] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" draggable="true">
+                    <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                </div>
             </div>
-            <div class="row">
+            <!-- PEZZI DA 5 -->
+            <div class="row" draggable="true">
                 <p class="pieces-number">
                     {{ pieces[5] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" draggable="true">
+                    <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                </div>
             </div>
         </div>
         <div>
