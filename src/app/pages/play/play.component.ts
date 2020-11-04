@@ -13,7 +13,7 @@ export class PlayComponent implements OnInit {
   gameBoard = board
   oppositeBoard = oppositeBoard
   turn: number = 1
-
+  playerID: number = gameSettings.playerID
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -26,7 +26,7 @@ export class PlayComponent implements OnInit {
       .subscribe(data => {
         index = data['value']
         this.turn = data['turn']
-        if (index !== null && this.turn != gameSettings.playerID) {
+        if ( index !== null && this.turn !== gameSettings.playerID ) {
           this.gameBoard[index].bomb = true
           // update dell'esito su firestore
           this.updateOutcome(index)
@@ -39,7 +39,7 @@ export class PlayComponent implements OnInit {
         let index: number = data['index']
         let value: boolean = data['value']
         // controllo se e il mio turno
-        if ( index !== null && this.turn == gameSettings.playerID ) {
+        if ( index !== null && this.turn === gameSettings.playerID ) {
           // settiamo la bomba e l'esito sulla board avversaria locale
           this.oppositeBoard[index].bomb = true
           this.oppositeBoard[index].busy = value
@@ -66,7 +66,7 @@ export class PlayComponent implements OnInit {
     // cambio il valore del turno
     this.turn = -this.turn
     // se non e il mio turno non faccio nulla
-    if (this.turn === gameSettings.playerID) {
+    if ( this.turn === gameSettings.playerID ) {
 
       // ESECUZIONE DELLA MOSSA
       // update del valore del turno su firebase
