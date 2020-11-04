@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { board, gameSettings, oppositeBoard } from '../../services/gameConfig';
+import { board, oppositeBoard, gameSettings } from '../../services/gameConfig';
 
 
 @Component({
@@ -17,8 +17,45 @@ export class PlayComponent implements OnInit {
 
   constructor(private firestore: AngularFirestore) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    // observable dell'update della mossa avversaria
+    // se non e il turno mio allora ascolto
+    let index: number = null
+    await this.firestore.collection(gameSettings.gameID).doc('last')
+      .valueChanges()
+      .subscribe(data => {
+        index = data['value']
+        this.turn = data['turn']
+        if (index && this.turn != gameSettings.playerID) {
+          this.gameBoard[index].bomb = true
+          // update dell'esito su firestore
+          this.updateOutcome(index)
+        }
+      })
+    // observable dell'esito della mia mossa
+    await this.firestore.collection(gameSettings.gameID).doc('outcome')
+      .valueChanges()
+      .subscribe(data => {
+        let index: number = data['index']
+        let value: boolean = data['value']
+        // controllo se e il mio turno
+        if ( index && this.turn == gameSettings.playerID ) {
+          // settiamo la bomba e l'esito sulla board avversaria locale
+          this.oppositeBoard[index].bomb = true
+          this.oppositeBoard[index].busy = value
+        }
+      })
+  }
 
+  updateOutcome(index: number) {
+    this.firestore.collection(gameSettings.gameID).doc('outcome')
+      .set(
+        {
+          'index': index,
+          'value': this.gameBoard[index].busy
+        },
+        { merge: true }
+      )
   }
 
   async attacks(index: number) {
@@ -32,8 +69,6 @@ export class PlayComponent implements OnInit {
     if (this.turn === gameSettings.playerID) {
 
       // ESECUZIONE DELLA MOSSA
-      // settiamo la bomba sulla board avversaria locale
-      this.oppositeBoard[index].bomb = true
       // update del valore del turno su firebase
       this.firestore.collection(gameSettings.gameID).doc('last')
         .set(

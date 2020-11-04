@@ -1,7 +1,6 @@
 import { Input, Output } from '@angular/core';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { threadId } from 'worker_threads';
 
 interface Neighbors {
   top: boolean,
