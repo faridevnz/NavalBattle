@@ -41,6 +41,11 @@
             .boat {
                 display: flex;
             }
+            .boat[draggable="false"] {
+                & > app-box {
+                    cursor: url('../../../assets/icons/not-allowed.svg'), auto;
+                }
+            }
 
             .pieces-number {
                 width: 40px;

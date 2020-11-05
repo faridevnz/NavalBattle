@@ -1,5 +1,5 @@
 <div class="row">
     <div class="circle" [ngClass]="{'active': turn !== playerID}"></div>
-    <app-grid [board]="gameBoard" [type]="'my'" [disableClick]="true" [latest]="latest" [defaultAlign]="'center'"></app-grid>
-    <app-grid [board]="oppositeBoard" [type]="'opposite'" (onOppositClick)="attacks($event)" [defaultAlign]="null"></app-grid>
+    <app-grid [board]="gameBoard" [type]="'my'" [disableClick]="true" [latest]="latest"></app-grid>
+    <app-grid [board]="oppositeBoard" [type]="'opposite'" (onOppositClick)="attacks($event)"></app-grid>
 </div>

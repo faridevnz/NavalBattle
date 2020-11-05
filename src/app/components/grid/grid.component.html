@@ -2,7 +2,6 @@
   <app-box 
     *ngFor="let state of board; index as i"
     [state]="state"
-    [align]="defaultAlign"
     [latest]="latest === i"
     (click)="clicked(i)"
   ></app-box>

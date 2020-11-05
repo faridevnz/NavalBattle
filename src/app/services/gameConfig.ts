@@ -1,13 +1,15 @@
 interface boxState {
     busy: boolean,
     bomb: boolean,
-    alignQueue: string[]
+    alignQueue: string[],
+    align: string
 }
 
 let box: boxState = {
     busy: false,
     bomb: false,
-    alignQueue: []
+    alignQueue: [],
+    align: 'center'
 }
 
 var board = [
