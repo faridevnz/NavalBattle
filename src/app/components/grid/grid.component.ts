@@ -14,6 +14,7 @@ interface boxState {
   align: string
 }
 
+
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -59,7 +60,7 @@ export class GridComponent implements OnInit {
         // emettiamo l'evento di cancellazione della barca
         this.onBoatDeleted.emit(num)
       })
-      // sottoscrizione allévento di click sinistro
+      // sottoscrizione all'evento di click sinistro
       box.onLeftClick.subscribe((click: dropEvent) => {
         let index: number = this.boxes.toArray().indexOf(box)
         //click su una casella vuota
@@ -118,6 +119,7 @@ export class GridComponent implements OnInit {
       this.board.slice(index, index+length).forEach((box, index) => {
         box.busy = true
         box.align = 'line-horizontal'
+        // sovrascrivo 'line-horizontal' se primo o ultimo box
         if ( index === 0 ) box.align = 'right'
         if ( index === length-1 ) box.align = 'left'
       })
@@ -160,6 +162,7 @@ export class GridComponent implements OnInit {
   }
 
   spin(index: number): void {
+    // aligns enum
     let spinRules = {
       'bottom': 'left',
       'left': 'top',
@@ -168,20 +171,28 @@ export class GridComponent implements OnInit {
       'line-vertical': 'line-horizontal',
       'line-horizontal': 'line-vertical',
       'center': 'center',
-
     }
     let neigh = this.boatLengthCalc(index)
     // top
     if ( index-neigh.before*10 < 0 ) return
-    for ( let i = index-10; i >= index-neigh.before*10; i -= 10 ) {
-      this.board[i].busy = true
-      this.board[i].align = spinRules[this.board[index].align]
+    this.board[index].align = spinRules[ this.board[index].align ]
+    for ( let i = 1; i <= neigh.before; i++ ) {
+      // setting new
+      this.board[index-(i*10)].busy = true
+      this.board[index-(i*10)].align = spinRules[ this.board[index-i].align ]
+      // delete old
+      this.board[index-i].busy = false
+      this.board[index-i].align = null
     }
-    //bottom
+    // bottom
     if ( index+neigh.after*10 > 99 ) return
-    for ( let i = index+10; i <= index+neigh.after*10; i += 10 ) {
-      this.board[i].busy = true
-      this.board[i].align = spinRules[this.board[index].align]
+    for ( let i = 1; i <= neigh.after; i++ ) {
+      // setting new
+      this.board[index+(i*10)].busy = true
+      this.board[index+(i*10)].align = spinRules[ this.board[index+i].align ]
+      // delete old
+      this.board[index+i].busy = false
+      this.board[index+i].align = null
     }
   }
 
