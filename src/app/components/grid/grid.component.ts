@@ -74,6 +74,12 @@ export class GridComponent implements OnInit {
   // cancellazione ricorsiva dei blocchi della barca
   deleteBoat(index: number, num: number, direction: string): number {
     // casi base
+    let horizontal = ['center', 'line-horizontal', 'right', 'left']
+    let vertical = ['line-vertical', 'top', 'bottom']
+    if ( horizontal.includes( this.board[index].align ) ) return this.deleteHorizontal(index, num, direction)
+    if ( vertical.includes( this.board[index].align  ) ) return this.deleteVertical(index, num, direction)
+  }
+  deleteHorizontal(index: number, num: number, direction: string): number {
     if ( !this.board[index].busy ) return num
     if ( this.board[index].align === 'center' ) {
       this.delete(index)
@@ -81,16 +87,35 @@ export class GridComponent implements OnInit {
     }
     if ( this.board[index].align === 'right' ) {
       this.delete(index)
-      return this.deleteBoat(index+1, num+1, 'right')
+      return this.deleteHorizontal(index+1, num+1, 'right')
     }
     if ( this.board[index].align === 'left' ) {
       this.delete(index)
-      return this.deleteBoat(index-1, num+1, 'left')
+      return this.deleteHorizontal(index-1, num+1, 'left')
     }
     this.delete(index)
-    if ( direction === null ) return this.deleteBoat(index+1, num, 'right') + this.deleteBoat(index-1, num+1, 'left')
-    else if ( direction === 'right' ) return this.deleteBoat(index+1, num+1, 'right')
-    else return this.deleteBoat(index-1, num+1, 'left')
+    if ( direction === null ) return this.deleteHorizontal(index+1, num, 'right') + this.deleteHorizontal(index-1, num+1, 'left')
+    else if ( direction === 'right' ) return this.deleteHorizontal(index+1, num+1, 'right')
+    else return this.deleteHorizontal(index-1, num+1, 'left')
+  }
+  deleteVertical(index: number, num: number, direction: string): number {
+    if ( !this.board[index].busy ) return num
+    if ( this.board[index].align === 'center' ) {
+      this.delete(index)
+      return 1
+    }
+    if ( this.board[index].align === 'bottom' ) {
+      this.delete(index)
+      return this.deleteVertical(index+10, num+1, 'bottom')
+    }
+    if ( this.board[index].align === 'top' ) {
+      this.delete(index)
+      return this.deleteVertical(index-10, num+1, 'top')
+    }
+    this.delete(index)
+    if ( direction === null ) return this.deleteVertical(index+10, num, 'bottom') + this.deleteVertical(index-10, num+1, 'top')
+    else if ( direction === 'bottom' ) return this.deleteVertical(index+10, num+1, 'bottom')
+    else return this.deleteVertical(index-10, num+1, 'top')
   }
   // elimina la barca
   delete(index) {
