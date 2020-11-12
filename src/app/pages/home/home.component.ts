@@ -38,6 +38,9 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // controllo sul refresh della pagina
+    if ( gameSettings.gameID === null ) this.router.navigate(['/'])
+    // altrimenti
     this.defaultBoxState.busy = true;
   }
 

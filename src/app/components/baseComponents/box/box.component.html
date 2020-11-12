@@ -1,7 +1,7 @@
 <div class="box" [ngClass]="{'no-border': !border, 'latest': latest}" (dragover)="draggedOver($event)" (drop)="droppedItem($event)" (contextmenu)="rightClick($event)" (click)="leftClick($event)">
   <div *ngIf="!state.busy && state.bomb" class="cross">X</div>
   <div *ngIf="state.align === null && state.busy && state.bomb" class="circle">O</div>
-  <div class="boat" *ngIf="state.align === 'center' && state.busy" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+  <div *ngIf="state.align === 'center' && state.busy" class="boat" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
   <div *ngIf="state.align === 'right'" class="boat-right" [ngClass]="{'boat-border-right': !border}"></div>
   <div *ngIf="state.align === 'left'" class="boat-left" [ngClass]="{'boat-border-left': !border}"></div>
   <div *ngIf="state.align === 'top'" class="boat-top"></div>
