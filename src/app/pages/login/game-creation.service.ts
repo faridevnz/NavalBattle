@@ -20,7 +20,9 @@ export class GameCreationService {
     });
   }
 
-  async createGame() {
+
+  // game creation function
+  async createGame(): Promise<void> {
     //generiamo il codice del Gioco
     gameSettings.gameID = generateRandomString(5)
     gameSettings.playerID = 1
@@ -29,33 +31,17 @@ export class GameCreationService {
       .doc(gameSettings.gameID)
       .set(
         {
-          'last': null,
-          'turn': gameSettings.playerID
-        }
-      )
-      .catch( err => console.log(err) );
-    this.firestore.collection('games')
-      .doc(gameSettings.gameID)
-      .set(
-        {
           'index': null,
+          'last': null,
           'outcome': null,
+          'turn': gameSettings.playerID,
           'winner': null
         }
       )
       .catch( err => console.log(err) );
   }
 
-  async joinGame(joinCode: string): Promise<any> {
-    this.firestore.collection('games').doc(joinCode).set(
-      { 
-        'turn': 1
-      },
-      { merge: true }
-    )
-    .catch((error) => console.log(error))
-  }
-
+  // get of all games
   allGames(): Observable<any> {
     return this.firestore.collection('games')
       .get()

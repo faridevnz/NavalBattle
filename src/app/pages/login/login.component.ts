@@ -24,18 +24,18 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  createGame() {
+  createGame(): void {
     this.gameCreation.createGame()
       .then(() => {
         this.route.navigate(['/settings'])
       })
   }
 
-  updateJoinCode(event: any) {
+  updateJoinCode(event: any): void {
     this.joinCode = event.target.value
   }
 
-  joinGame() {
+  joinGame(): void {
     this.existGame(this.joinCode)
       .then( result => {
         this.error = !result
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
         if ( result ) {
           // creazione del codice utente
           gameSettings.playerID = -1
-          this.gameCreation.joinGame(this.joinCode)
           gameSettings.gameID = this.joinCode
           this.route.navigate(['/settings'])
         } 
