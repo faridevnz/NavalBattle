@@ -11,6 +11,7 @@ interface dropEvent {
   event: Event
 }
 
+
 // Component
 @Component({
   selector: 'app-box',

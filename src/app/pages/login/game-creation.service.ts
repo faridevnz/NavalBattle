@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { generateRandomString } from '../../services/utils';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { gameSettings } from '../../services/gameConfig';
+import { Observable, Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,35 +25,40 @@ export class GameCreationService {
     gameSettings.gameID = generateRandomString(5)
     gameSettings.playerID = 1
     // scriviamo su firebase
-    this.firestore.collection(gameSettings.gameID)
-      .doc('last')
+    this.firestore.collection('games')
+      .doc(gameSettings.gameID)
       .set(
         {
-          'value': null,
+          'last': null,
           'turn': gameSettings.playerID
         }
       )
       .catch( err => console.log(err) );
-    this.firestore.collection(gameSettings.gameID)
-      .doc('outcome')
+    this.firestore.collection('games')
+      .doc(gameSettings.gameID)
       .set(
         {
           'index': null,
-          'value': null,
+          'outcome': null,
           'winner': null
         }
       )
       .catch( err => console.log(err) );
   }
 
-  async getAllGames(joinCode: string): Promise<any> {
-    this.firestore.collection(joinCode).doc('last').set(
+  async joinGame(joinCode: string): Promise<any> {
+    this.firestore.collection('games').doc(joinCode).set(
       { 
         'turn': 1
       },
       { merge: true }
     )
     .catch((error) => console.log(error))
+  }
+
+  allGames(): Observable<any> {
+    return this.firestore.collection('games')
+      .get()
   }
 
 }
