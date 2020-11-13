@@ -1,6 +1,7 @@
 import { Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { runInThisContext } from 'vm';
 import { BoxComponent } from '../baseComponents/box/box.component';
 
 interface dropEvent {
@@ -46,12 +47,14 @@ export class GridComponent implements OnInit {
     this.boxes.forEach(box => {
       // sottoscrizione all'evento di drop
       box.onDrop.subscribe((drop: dropEvent) => {
+        if ( this.disableClick ) return 
         let index: number = this.boxes.toArray().indexOf(box)
         let length: number = parseInt( drop.event.dataTransfer.getData('text') )
         this.placeElement(index, length)
       })
       // sottoscrizione all'evento di click destro
       box.onRightClick.subscribe((click: dropEvent) => {
+        if ( this.disableClick ) return
         let index: number = this.boxes.toArray().indexOf(box)
         // click su una casella vuota
         if ( !this.board[index].busy ) return
@@ -62,6 +65,7 @@ export class GridComponent implements OnInit {
       })
       // sottoscrizione all'evento di click sinistro
       box.onLeftClick.subscribe((click: dropEvent) => {
+        if ( this.disableClick ) return
         let index: number = this.boxes.toArray().indexOf(box)
         //click su una casella vuota
         if ( !this.board[index].busy ) return
