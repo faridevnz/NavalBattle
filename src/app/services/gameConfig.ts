@@ -3,7 +3,7 @@ interface boxState {
     bomb: boolean,
     alignQueue: string[],
     align: string
-}
+  }
 
 let box: boxState = {
     busy: false,

@@ -3,6 +3,7 @@
     *ngFor="let state of board; index as i"
     [state]="state"
     [latest]="latest === i"
+    [type]="type"
     (click)="clicked(i)"
   ></app-box>
 </div>

@@ -26,7 +26,7 @@ export class GridComponent implements OnInit {
   // props
   @Input() disableClick: boolean = false
   @Input() board: boxState[] = null
-  @Input() type: string // my or opposite
+  @Input() type: string // 'my' or 'opposite'
   @Input() latest: number = null
   // event emitter
   @Output() onOppositClick: EventEmitter<number> = new EventEmitter<number>()

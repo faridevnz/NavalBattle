@@ -12,7 +12,7 @@
                     {{ pieces[1] }}
                 </p>
                 <div class="boat" [attr.draggable]="pieces[1] > 0" (dragstart)="dragStarted($event, '1')">
-                    <app-box [state]="defaultBoxState | boxState:'center'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'center'" [border]="false" [type]="'my'"></app-box>
                 </div>
             </div>
             <!-- PEZZI DA 2 -->
@@ -21,8 +21,8 @@
                     {{ pieces[2] }}
                 </p>
                 <div class="boat" [attr.draggable]="pieces[2] > 0" (dragstart)="dragStarted($event, '2')">
-                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
                 </div>
             </div>
             <!-- PEZZI DA 3 -->
@@ -31,9 +31,9 @@
                     {{ pieces[3] }}
                 </p>
                 <div class="boat" [attr.draggable]="pieces[3] > 0" (dragstart)="dragStarted($event, '3')">
-                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
                 </div>
             </div>
             <!-- PEZZI DA 4 -->
@@ -42,10 +42,10 @@
                     {{ pieces[4] }}
                 </p>
                 <div class="boat" [attr.draggable]="pieces[4] > 0"  (dragstart)="dragStarted($event, '4')">
-                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
                 </div>
             </div>
             <!-- PEZZI DA 5 -->
@@ -54,11 +54,11 @@
                     {{ pieces[5] }}
                 </p>
                 <div class="boat" [attr.draggable]="pieces[5] > 0" (dragstart)="dragStarted($event, '5')">
-                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false"></app-box>
-                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
                 </div>
             </div>
         </div>

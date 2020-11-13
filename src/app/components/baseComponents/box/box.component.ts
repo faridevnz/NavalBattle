@@ -24,6 +24,7 @@ export class BoxComponent implements OnInit {
   @Input() state: boxState
   @Input() border: boolean = true
   @Input() latest: boolean = false
+  @Input() type: string = null // 'my' or 'opposite'
   // event
   @Output() onDrop: EventEmitter<dropEvent> = new EventEmitter<dropEvent>()
   @Output() onRightClick: EventEmitter<dropEvent> = new EventEmitter<dropEvent>()
