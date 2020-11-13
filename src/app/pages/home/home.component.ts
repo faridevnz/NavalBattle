@@ -47,9 +47,6 @@ export class HomeComponent implements OnInit {
 
   // FUNCTIONS
   next(): void {
-    // TODO: eliminare redirect diretto
-    this.router.navigate(['/play'])
-    return
     // caso di errore
     if ( this.boxNumber != 30 ) this.error = true;
     // caso corretto
@@ -68,7 +65,6 @@ export class HomeComponent implements OnInit {
   }
 
   dragStarted(event: DragEvent, boxesNumber: string) {
-    console.log('START EVENT:')
     event.dataTransfer.setData('text/plain', boxesNumber)
   }
 

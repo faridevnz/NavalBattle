@@ -22,7 +22,6 @@ export class PlayComponent implements OnInit {
   constructor(private firestore: AngularFirestore, private router: Router) { }
 
   async ngOnInit() {
-    console.log("ID: " + gameSettings.playerID)
     //se refresho la pagina redirect alla home
     if ( gameSettings.gameID === null ) this.router.navigate(['/'])
     
@@ -31,14 +30,11 @@ export class PlayComponent implements OnInit {
     await this.firestore.collection('games').doc(gameSettings.gameID)
       .valueChanges()
       .subscribe( data => {
-        console.log('UPDATING')
         let index: number = data['last']
         this.turn = data['turn']
-        console.log(index)
         // TURNO MIO
         if ( this.turn === gameSettings.playerID ) {
           // devo vedere dove ha sparato l'avversario e devo comunicare l'esito dello sparo
-          console.log('TURNO MIO')
           if ( index === null ) return
           this.latest = index
           this.gameBoard[index].bomb = true 
@@ -49,7 +45,6 @@ export class PlayComponent implements OnInit {
         }
         // TURNO AVVERSARIO
         else {
-          console.log('TURNO AVVERSARIO')
           if ( index === null ) return
           // devo vedere quale e l'esito dello sparo e se l'avversario ha vinto
           let value: boolean = data['outcome']
@@ -82,7 +77,6 @@ export class PlayComponent implements OnInit {
     // cambio il valore del turno
     // se non e il mio turno non faccio nulla
     if (this.turn === gameSettings.playerID) {
-      console.log('ATTACCO TURNO: ' + this.turn)
       // ESECUZIONE DELLA MOSSA
       // update del valore del turno su firebase
       this.firestore.collection('games').doc(gameSettings.gameID)

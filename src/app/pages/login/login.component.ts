@@ -17,11 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private gameCreation: GameCreationService, private route: Router) { }
 
   ngOnInit(): void {
-    this.gameCreation.allGames().subscribe(games => {
-      games.forEach(game => {
-        console.log(game.id)
-      });
-    })
+    
   }
 
   createGame(): void {
@@ -55,7 +51,6 @@ export class LoginComponent implements OnInit {
     await this.gameCreation.allGames().toPromise()
       .then(games => {
         games.forEach(game => {
-          console.log('evaluing')
           if ( game.id == gameCode ) exists = true
         });
       })

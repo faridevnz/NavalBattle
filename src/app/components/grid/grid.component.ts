@@ -172,19 +172,16 @@ export class GridComponent implements OnInit {
   }
 
   isPossibleSpin(index: number): boolean {
-    console.log('INDEX: ' + index)
     let neigh = this.boatLengthCalc(index)
     let isAllTrue: boolean = true
     // top
     if ( index-neigh.before*10 < 0 ) return false
     for ( let i = index-10; i >= index-neigh.before*10; i -= 10 ) {
-      console.log('i: ' + i + ', busy: ' + this.board[i].busy)
       isAllTrue = isAllTrue && !this.board[i].busy
     }
     //bottom
     if ( index+neigh.after*10 > 99 ) return false
     for ( let i = index+10; i <= index+neigh.after*10; i += 10 ) {
-      console.log('i: ' + i + ', busy: ' + this.board[i].busy)
       isAllTrue = isAllTrue && !this.board[i].busy
     }
     return isAllTrue
