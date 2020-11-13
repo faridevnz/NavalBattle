@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { generateRandomString } from '../../services/utils';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { gameSettings } from '../../services/gameConfig';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +45,15 @@ export class GameCreationService {
   allGames(): Observable<any> {
     return this.firestore.collection('games')
       .get()
+  }
+
+  removeAllGames() {
+    this.firestore.collection('games').get().toPromise()
+      .then(games => {
+        games.forEach(game => {
+          this.firestore.collection('games').doc(game.id).delete().then(data => console.log('DELETED: ' + data))
+        })
+      })
   }
 
 }

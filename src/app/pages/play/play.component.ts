@@ -17,6 +17,7 @@ export class PlayComponent implements OnInit {
   playerID: number = gameSettings.playerID
   latest: number = null
   remainingBoxes: number = 30
+  winner: number = null
 
 
   constructor(private firestore: AngularFirestore, private router: Router) { }
@@ -24,7 +25,6 @@ export class PlayComponent implements OnInit {
   async ngOnInit() {
     //se refresho la pagina redirect alla home
     if ( gameSettings.gameID === null ) this.router.navigate(['/'])
-    
     // observable dell'update della mossa avversaria
     // se non e il turno mio allora ascolto
     await this.firestore.collection('games').doc(gameSettings.gameID)
@@ -41,6 +41,7 @@ export class PlayComponent implements OnInit {
           // se mi ha colpito decremento il numero di box mancanti
           if ( this.gameBoard[index].busy ) this.remainingBoxes--
           // update dell'esito su firestore
+          if ( this.winnerCheck() ) this.winner = gameSettings.playerID
           this.updateOutcome(index)
         }
         // TURNO AVVERSARIO
@@ -56,12 +57,10 @@ export class PlayComponent implements OnInit {
           this.oppositeBoard[index].busy = value
         }
       })
-
   }
 
 
   // FUNCTIONS
-
   updateOutcome(index: number) {
     this.firestore.collection('games').doc(gameSettings.gameID)
       .set(
@@ -89,6 +88,14 @@ export class PlayComponent implements OnInit {
         )
         .catch(error => console.log(error))
     }
+  }
+
+  winnerCheck(): boolean {
+    return this.gameBoard.filter((box) => {
+      return box.busy
+    }).reduce((accumulator, box) => {
+      return accumulator && box.bomb
+    }, true)
   }
 
 }

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private gameCreation: GameCreationService, private route: Router) { }
 
   ngOnInit(): void {
-    
+    // this.gameCreation.removeAllGames()
   }
 
   createGame(): void {
