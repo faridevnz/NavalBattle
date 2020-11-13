@@ -34,6 +34,11 @@ export class PlayComponent implements OnInit {
         this.turn = data['turn']
         // TURNO MIO
         if ( this.turn === gameSettings.playerID ) {
+          // VERIFICA VITTORIA AVERSARIO
+          let winner: number = data['winner']
+          // se la partita e finita redirect alla pagina di fine
+          if (winner !== null) this.router.navigate(['/end'], { queryParams: { winner: winner } })
+          // ALTRIMENTI
           // devo vedere dove ha sparato l'avversario e devo comunicare l'esito dello sparo
           if ( index === null ) return
           this.latest = index
@@ -66,13 +71,15 @@ export class PlayComponent implements OnInit {
       .set(
         {
           'outcome': this.gameBoard[index].busy,
-          'winner': (this.remainingBoxes === 0) ? gameSettings.playerID : null
+          'winner': (this.winnerCheck()) ? gameSettings.playerID : null
         },
         { merge: true }
       )
   }
 
   async attacks(index: number) {
+    // se ho gia attaccato quell'indice non faccio nulla
+    if ( this.oppositeBoard[index].bomb ) return
     // cambio il valore del turno
     // se non e il mio turno non faccio nulla
     if (this.turn === gameSettings.playerID) {
