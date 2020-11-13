@@ -28,15 +28,17 @@ export class PlayComponent implements OnInit {
     
     // observable dell'update della mossa avversaria
     // se non e il turno mio allora ascolto
-
     await this.firestore.collection('games').doc(gameSettings.gameID)
       .valueChanges()
       .subscribe( data => {
-        let index: number = data['latest']
+        console.log('UPDATING')
+        let index: number = data['last']
         this.turn = data['turn']
+        console.log(index)
         // TURNO MIO
         if ( this.turn === gameSettings.playerID ) {
           // devo vedere dove ha sparato l'avversario e devo comunicare l'esito dello sparo
+          console.log('TURNO MIO')
           if ( index === null ) return
           this.latest = index
           this.gameBoard[index].bomb = true 
@@ -47,6 +49,8 @@ export class PlayComponent implements OnInit {
         }
         // TURNO AVVERSARIO
         else {
+          console.log('TURNO AVVERSARIO')
+          if ( index === null ) return
           // devo vedere quale e l'esito dello sparo e se l'avversario ha vinto
           let value: boolean = data['outcome']
           let winner: number = data['winner']
@@ -76,15 +80,15 @@ export class PlayComponent implements OnInit {
 
   async attacks(index: number) {
     // cambio il valore del turno
-    this.turn = -this.turn
     // se non e il mio turno non faccio nulla
     if (this.turn === gameSettings.playerID) {
+      console.log('ATTACCO TURNO: ' + this.turn)
       // ESECUZIONE DELLA MOSSA
       // update del valore del turno su firebase
       this.firestore.collection('games').doc(gameSettings.gameID)
         .set(
           {
-            'turn': this.turn,
+            'turn': -this.turn,
             'last': index
           },
           { merge: true }
