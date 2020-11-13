@@ -10,33 +10,52 @@ import { gameSettings } from '../../services/gameConfig';
 })
 export class LoginComponent implements OnInit {
 
-  joinCode: string = null
+  joinCode: string = ''
   error: boolean = false
 
 
   constructor(private gameCreation: GameCreationService, private route: Router) { }
 
   ngOnInit(): void {
-  
+    // this.gameCreation.removeAllGames()
   }
 
-  createGame() {
+  createGame(): void {
     this.gameCreation.createGame()
       .then(() => {
         this.route.navigate(['/settings'])
       })
   }
 
-  updateJoinCode(event: any) {
+  updateJoinCode(event: any): void {
     this.joinCode = event.target.value
   }
 
-  async joinGame() {
-    // creazione del codice utente
-    gameSettings.playerID = -1
-    this.gameCreation.getAllGames(this.joinCode)
-    gameSettings.gameID = this.joinCode
-    this.route.navigate(['/settings'])
+  joinGame(): void {
+    this.existGame(this.joinCode)
+      .then( result => {
+        this.error = !result
+        // valid code
+        if ( result ) {
+          // creazione del codice utente
+          gameSettings.playerID = -1
+          gameSettings.gameID = this.joinCode
+          this.route.navigate(['/settings'])
+        } 
+      })
+      .catch( error => console.log(error) )
+  }
+
+  async existGame(gameCode: string): Promise<boolean> {
+    let exists = false
+    await this.gameCreation.allGames().toPromise()
+      .then(games => {
+        games.forEach(game => {
+          if ( game.id == gameCode ) exists = true
+        });
+      })
+      .catch( error => console.log(error) )
+    return exists
   }
 
 }

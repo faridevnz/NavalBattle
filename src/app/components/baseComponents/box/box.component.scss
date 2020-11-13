@@ -2,10 +2,10 @@
   width: 50px;
   height: 50px;
   border: solid 1px #ffffff;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 
   .cross {
     color: tomato;
@@ -20,96 +20,101 @@
     font-size: 20px;
   }
 
-  .boat {
-    border-radius: 10px;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    width: 80%;
-    height: 80%;
-    box-sizing: border-box;
-  }
-
-  .boat[class="boat destroyed"] {
-    background-color: #ff634790;
-    border: solid 2px  #ff6347;
-  }
-  .boat[class="boat no-border"] {
-    border: solid 2px transparent !important;
-  }
-
-  .boat-right {
-    border-radius: 10px 0 0 10px;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-right: none;
+  .boat-container {
     width: 100%;
-    height: 80%;
-    margin-left: 10%;
-    box-sizing: border-box;
-  }
-
-  .boat-left {
-    border-radius: 0 10px 10px 0;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-left: none;
-    width: 100%;
-    height: 80%;
-    margin-right: 10%;
-    box-sizing: border-box;
-  }
-
-  .boat-top {
-    border-radius: 0 0 10px 10px;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-top: none;
-    width: 80%;
     height: 100%;
-    margin-bottom: 10%;
-    box-sizing: border-box;
-  }
-
-  .boat-bottom {
-    border-radius: 10px 10px 0 0;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-bottom: none;
-    width: 80%;
-    height: 100%;
-    margin-top: 10%;
-    box-sizing: border-box;
-  }
-
-  .boat-line-horizontal {
-    border-radius: 0;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-left: none;
-    border-right: none;
-    width: 100%;
-    height: 80%;
-    box-sizing: border-box;
-  }
-
-  .boat-line-vertical {
-    border-radius: 0;
-    background-color: #9dff4785;
-    border: solid 2px #9dff47;
-    border-top: none;
-    border-bottom: none;
-    width: 80%;
-    height: 100%;
-    box-sizing: border-box;
-  }
-
-  .boat-border-right {
-    border-right: solid 2px #9dff47;
-  }
-  .boat-border-left {
-    border-left: solid 2px #9dff47;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
   
+    .boat {
+      border-radius: 10px;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      width: 80%;
+      height: 80%;
+      box-sizing: border-box;
+    }
+  
+    .boat[class="boat no-border"] {
+      border: solid 2px transparent !important;
+    }
+  
+    .boat-right {
+      border-radius: 10px 0 0 10px;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-right: none;
+      width: 100%;
+      height: 80%;
+      margin-left: 10%;
+      box-sizing: border-box;
+    }
+  
+    .boat-left {
+      border-radius: 0 10px 10px 0;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-left: none;
+      width: 100%;
+      height: 80%;
+      margin-right: 10%;
+      box-sizing: border-box;
+    }
+  
+    .boat-top {
+      border-radius: 0 0 10px 10px;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-top: none;
+      width: 80%;
+      height: 100%;
+      margin-bottom: 10%;
+      box-sizing: border-box;
+    }
+  
+    .boat-bottom {
+      border-radius: 10px 10px 0 0;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-bottom: none;
+      width: 80%;
+      height: 100%;
+      margin-top: 10%;
+      box-sizing: border-box;
+    }
+  
+    .boat-line-horizontal {
+      border-radius: 0;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-left: none;
+      border-right: none;
+      width: 100%;
+      height: 80%;
+      box-sizing: border-box;
+    }
+  
+    .boat-line-vertical {
+      border-radius: 0;
+      background-color: #9dff4785;
+      border: solid 2px #9dff47;
+      border-top: none;
+      border-bottom: none;
+      width: 80%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+  
+    .boat-border-right {
+      border-right: solid 2px #9dff47;
+    }
+    .boat-border-left {
+      border-left: solid 2px #9dff47;
+    }
+
+
+  }
 
 }
 
@@ -118,4 +123,9 @@
 }
 .latest {
   background-color: #FFFFFF50;
+}
+
+.destroyed {
+  background-color: #ff634790 !important;
+  border: solid 2px  #ff6347 !important;
 }

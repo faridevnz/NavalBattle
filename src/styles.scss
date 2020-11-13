@@ -10,3 +10,8 @@ body {
   background-color: #1a1b26;
   font-family: 'Turret Road', cursive;
 }
+
+button:focus,
+input:focus {
+  outline: none;
+}

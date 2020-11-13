@@ -4,8 +4,6 @@
         <div class="game-code">
             <p>condividi questo codice con il tuo avversario</p>
             <h4>game: {{ gameID }}</h4>
-            <br>
-            box: {{ boxNumber }}
         </div>
         <div>
             <!-- PEZZI DA 1 -->
@@ -13,44 +11,55 @@
                 <p class="pieces-number">
                     {{ pieces[1] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'center'" [border]="false"></app-box>
+                <div class="boat" [attr.draggable]="pieces[1] > 0" (dragstart)="dragStarted($event, '1')">
+                    <app-box [state]="defaultBoxState | boxState:'center'" [border]="false" [type]="'my'"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 2 -->
             <div class="row">
                 <p class="pieces-number">
                     {{ pieces[2] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" [attr.draggable]="pieces[2] > 0" (dragstart)="dragStarted($event, '2')">
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 3 -->
             <div class="row">
                 <p class="pieces-number">
                     {{ pieces[3] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" [attr.draggable]="pieces[3] > 0" (dragstart)="dragStarted($event, '3')">
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
+                </div>
             </div>
             <!-- PEZZI DA 4 -->
             <div class="row">
                 <p class="pieces-number">
                     {{ pieces[4] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" [attr.draggable]="pieces[4] > 0"  (dragstart)="dragStarted($event, '4')">
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
+                </div>
             </div>
+            <!-- PEZZI DA 5 -->
             <div class="row">
                 <p class="pieces-number">
                     {{ pieces[5] }}
                 </p>
-                <app-box [state]="defaultBoxState" [align]="'right'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'line-horizontal'" [border]="false"></app-box>
-                <app-box [state]="defaultBoxState" [align]="'left'" [border]="false"></app-box>
+                <div class="boat" [attr.draggable]="pieces[5] > 0" (dragstart)="dragStarted($event, '5')">
+                    <app-box [state]="defaultBoxState | boxState:'right'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'line-horizontal'" [border]="false" [type]="'my'"></app-box>
+                    <app-box [state]="defaultBoxState | boxState:'left'" [border]="false" [type]="'my'"></app-box>
+                </div>
             </div>
         </div>
         <div>
@@ -59,6 +68,6 @@
         </div>
     </div>
     <div class="grid-container">
-        <app-grid [board]="board" [type]="'my'" (onBoxAdded)="incrementBoxNumber($event)" [defaultAlign]="'center'"></app-grid>
+        <app-grid [board]="board" [type]="'my'" (onBoatAdded)="decreasePieces($event)" (onBoatDeleted)="increasePieces($event)"></app-grid>
     </div>
 </div>

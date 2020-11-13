@@ -3,6 +3,13 @@ import { Router } from '@angular/router';
 import { defaultBox } from '../../services/gameConfig';
 import { gameSettings, board } from '../../services/gameConfig';
 
+interface boxState {
+  busy: boolean,
+  bomb: boolean,
+  alignQueue: string[],
+  align: string
+}
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +23,7 @@ export class HomeComponent implements OnInit {
   board = board
   gameID: string = gameSettings.gameID
   playerID: string = gameSettings.playerID
-  defaultBoxState = defaultBox
+  defaultBoxState: boxState = defaultBox
   boxNumber: number = 0
   error: boolean = false
   pieces = {
@@ -31,17 +38,14 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // controllo sul refresh della pagina
+    if ( gameSettings.gameID === null ) this.router.navigate(['/'])
+    // altrimenti
     this.defaultBoxState.busy = true;
   }
 
 
   // FUNCTIONS
-
-  incrementBoxNumber(value: number): void {
-    this.error = false;
-    this.boxNumber += value
-  }
-
   next(): void {
     // caso di errore
     if ( this.boxNumber != 30 ) this.error = true;
@@ -49,6 +53,23 @@ export class HomeComponent implements OnInit {
     else {
       this.router.navigate(['/play'])
     }
+  }
+
+  decreasePieces(value: number): void {
+    this.pieces[value]--
+    this.boxNumber += value
+  }
+  increasePieces(value: number): void {
+    this.pieces[value]++
+    this.boxNumber -= value
+  }
+
+  dragStarted(event: DragEvent, boxesNumber: string) {
+    event.dataTransfer.setData('text/plain', boxesNumber)
+  }
+
+  dragOver(event) {
+    event.preventDefault()
   }
 
 }

@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/baseComponents/button/button.component';
 import { PlayComponent } from './pages/play/play.component';
 import { EndComponent } from './pages/end/end.component';
+import { BoxStatePipe } from './pages/home/box-state.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EndComponent } from './pages/end/end.component';
     LoginComponent,
     ButtonComponent,
     PlayComponent,
-    EndComponent
+    EndComponent,
+    BoxStatePipe
   ],
   imports: [
     BrowserModule,

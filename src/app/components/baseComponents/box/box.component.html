@@ -1,11 +1,17 @@
-<div class="box" [ngClass]="{'no-border': !border, 'latest': latest}">
-  <div *ngIf="!state.busy && state.bomb" class="cross">X</div>
-  <div *ngIf="align === null && state.busy && state.bomb" class="circle">O</div>
-  <div class="boat" *ngIf="align === 'center' && state.busy" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
-  <div *ngIf="align === 'right'" class="boat-right" [ngClass]="{'boat-border-right': !border}"></div>
-  <div *ngIf="align === 'left'" class="boat-left" [ngClass]="{'boat-border-left': !border}"></div>
-  <div *ngIf="align === 'top'" class="boat-top"></div>
-  <div *ngIf="align === 'bottom'" class="boat-bottom"></div>
-  <div *ngIf="align === 'line-horizontal'" class="boat-line-horizontal" [ngClass]="{'boat-border-right boat-border-left': !border}"></div>
-  <div *ngIf="align === 'line-vertical'" class="boat-line-vertical" [ngClass]="{'boat-border-right boat-border-left': !border}"></div>
+<div class="box" [ngClass]="{'no-border': !border, 'latest': latest}" (dragover)="draggedOver($event)" (drop)="droppedItem($event)" (contextmenu)="rightClick($event)" (click)="leftClick($event)">
+  <!-- OPPOSITE BOARD -->
+  <div *ngIf="type === 'opposite'">
+    <div *ngIf="state.busy && state.bomb" class="circle">O</div>
+    <div *ngIf="!state.busy && state.bomb" class="cross">X</div>
+  </div>
+  <!-- MY BOARD -->
+  <div *ngIf="type === 'my'" class="boat-container">
+      <div *ngIf="state.align === 'center' && state.busy" class="boat" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'right' && state.busy" class="boat-right" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'left' && state.busy" class="boat-left" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'top' && state.busy" class="boat-top" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'bottom' && state.busy" class="boat-bottom" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'line-horizontal' && state.busy" class="boat-line-horizontal" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+      <div *ngIf="state.align === 'line-vertical' && state.busy" class="boat-line-vertical" [ngClass]="{'destroyed': state.bomb && state.busy}"></div>
+  </div>
 </div>
