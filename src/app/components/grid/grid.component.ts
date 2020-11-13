@@ -1,7 +1,6 @@
 import { Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { runInThisContext } from 'vm';
 import { BoxComponent } from '../baseComponents/box/box.component';
 
 interface dropEvent {
